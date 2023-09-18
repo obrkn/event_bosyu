@@ -1,0 +1,19 @@
+<%= form_with url: users_index_path,
+              method: :get,
+              html: { data: {
+                turbo_frame: "user-list",
+                controller: "form",
+                action: "input->form#submit",
+              }} do |form| %>
+  <%= form.text_field :name, autocomplete: :off %>
+  <%= form.submit :search %>
+<% end %>
+
+<%= turbo_frame_tag "user-list" do %>
+  <% @users.each do |user| %>
+    <p>
+      <strong>name:</strong>
+      <%= user.name %>
+    </p>
+  <% end %>
+<% end %>
